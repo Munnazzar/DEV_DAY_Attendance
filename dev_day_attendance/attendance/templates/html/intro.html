@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Day Mark Attendance</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap">
+</head>
+
+<body>
+  <div class="container">
+    <div class="content">
+      <img src="{% static '/img/DD24_Logo_With_Tagline.png' %}" alt="Developer Day Logo"> <!-- Corrected path for the image -->
+      <h1>Mark Attendance</h1>
+      <form id="attendanceform" action="#">
+        <input type="text" id="code" name="code" placeholder="Enter code here" maxlength="9"><br><br>
+        <input type="submit" id="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+  <div class="background-text">
+    <span>DREAM DEVELOP</span>
+    <span>DELIVER</span>
+  </div>
+</body>
+
+</html>

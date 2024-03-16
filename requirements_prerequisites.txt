@@ -1,0 +1,9 @@
+-> First create a virtual environment then activate it then install all the dependencies listed below: (except no. 6 which can be installed from mongoDB website)
+However all other modules can be installed using ( pip install modulename ) command
+
+1)djongo (for mongodb and Django ORM) == 1.3.6
+2)django == 4.1.13 
+3)pytz  == 2024.1
+4)pymongo == 3.12.3
+5)dnspython == 2.6.1
+6)mongodb database (i.e MongoCompass) ==1.42.2
