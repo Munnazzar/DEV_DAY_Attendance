@@ -1,5 +1,5 @@
-from mongoengine import Document, StringField, BooleanField, ReferenceField
-import datetime
+from mongoengine import Document, StringField, BooleanField, ReferenceField,DateTimeField
+from datetime import datetime
 
 class DevDayAttendence(Document):
     comp_name = StringField(required=True)
@@ -18,7 +18,10 @@ class DevDayAttendence(Document):
     p2_email = StringField(required=True)
     reference_code = StringField(required=True)
     att_code = StringField(required=True)
-
+class Event(Document):
+    event_name=StringField(required=True)
+    start_time=DateTimeField(required=True)
+    end_time=DateTimeField(required=True)
 class Attendance(Document):
     teamName= StringField(required=True)
     attendanceStatus= BooleanField(default=False)
