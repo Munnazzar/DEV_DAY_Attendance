@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
 # MongoDB credentials
 from mongoengine import connect
 from attendance.credentials import USERNAME, PASSWORD, DATABASE_HOST, DATABASE_NAME
@@ -73,7 +72,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "dev_day_attendance.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

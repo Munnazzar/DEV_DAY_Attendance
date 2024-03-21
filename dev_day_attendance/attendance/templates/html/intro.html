@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Developer Day Mark Attendance</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'introStyles.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" />
   </head>
@@ -15,10 +15,12 @@
       <div class="content">
         <img src="{% static '/img/DD24_Logo_With_Tagline.png' %}" alt="Developer Day Logo" /> <!-- Corrected path for the image -->
         <h1>Mark Attendance</h1>
-        <form id="attendanceform" action="#">
+        <form id="attendanceform" action="#" method="post">
+          {% csrf_token %}
           <input type="text" id="code" name="code" placeholder="Enter code here" maxlength="9" /><br /><br />
           <input type="submit" id="submit" value="Submit" />
         </form>
+        <p style="color: red;">{{msg}}</p>
       </div>
     </div>
     <div class="background-text">
@@ -26,12 +28,12 @@
       <span>DELIVER</span>
     </div>
 
-    <div style="display: flex; flex-direction: column; color: white; background-color: black;z-index: 100;">
+    <!-- <div style="display: flex; flex-direction: column; color: white; background-color: black;z-index: 100;">
       {% for p in DevDayAttendenceData %}
         <div>{{ p.team_name }}</div>
         <div>{{ p.att_code }}</div>
         
       {% endfor %}
-    </div>
+    </div> -->
   </body>
 </html>
