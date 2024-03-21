@@ -16,11 +16,11 @@ def landingpage(request):
                 utcTime= currentTime.astimezone(pytz.utc) # we have to convert PKT time to UTC, since mongo
                                                           # stores time fields automatically in UTC
                 if utcTime<eventDetails.start_time.replace(tzinfo=pytz.utc):
-                    return render(request, "html/intro.html", {"msg":"Error: Event has not started yet"})
+                    return render(request, "html/intro.html", {"msg":"Error: Competition has not started yet"})
                 elif utcTime>eventDetails.end_time.replace(tzinfo=pytz.utc):
-                    return render(request, "html/intro.html", {"msg":"Error: Event has ended"})
+                    return render(request, "html/intro.html", {"msg":"Error: Competition has ended"})
             except:
-                return render(request, "html/intro.html", {"msg":"Error: Event details not found"})
+                return render(request, "html/intro.html", {"msg":"Error: Competition details not found"})
            
             try:
                 attendanceObj= Attendance.objects.get(teamName=record.team_name)
