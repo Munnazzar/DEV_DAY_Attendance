@@ -19,7 +19,7 @@ class DevDayAttendence(Document):
     reference_code = StringField(required=True)
     att_code = StringField(required=True)
 class Event(Document):
-    event_name=StringField(required=True)
+    competitionName=StringField(required=True)
     start_time=DateTimeField(required=True)
     end_time=DateTimeField(required=True)
 class Attendance(Document):
