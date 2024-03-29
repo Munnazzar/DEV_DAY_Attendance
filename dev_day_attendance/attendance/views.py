@@ -24,14 +24,16 @@ def landingpage(request):
             if distance>1000: #a kilometer
                 return render(request, "html/intro.html", {"msg":"Error: You are not in the vicinity of the event"})
             try:
-                currentTime= datetime.now()
-                eventDetails= Event.objects.get(competitionName=record.comp_name)
-                utcTime= currentTime.astimezone(pytz.utc) # we have to convert PKT time to UTC, since mongo
-                                                          # stores time fields automatically in UTC
-                if utcTime<eventDetails.start_time.replace(tzinfo=pytz.utc):
-                    return render(request, "html/intro.html", {"msg":"Error: Competition has not started yet"})
-                elif utcTime>eventDetails.end_time.replace(tzinfo=pytz.utc):
-                    return render(request, "html/intro.html", {"msg":"Error: Competition has ended"})
+                currentTime = datetime.now()
+                eventDetails = Event.objects.get(competitionName=record.comp_name)
+                currentTime = currentTime.strftime("%H:%M:%S")
+                event_start_time = eventDetails.start_time.strftime("%H:%M:%S") 
+                event_end_time = eventDetails.end_time.strftime("%H:%M:%S")
+
+                if currentTime < event_start_time:
+                    return render(request, "html/intro.html", {"msg": "Error: Competition has not started yet"})
+                elif currentTime > event_end_time:
+                    return render(request, "html/intro.html", {"msg": "Error: Competition has ended"})
             except:
                 return render(request, "html/intro.html", {"msg":"Error: Competition details not found"})
            
