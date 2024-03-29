@@ -87,7 +87,7 @@ body {
     font-size: 1.2rem;
   }
   
-  #submit{
+  .submit-button {
     background-color: #003b66;
     color: var(--white);
     height: auto;
@@ -95,7 +95,13 @@ body {
     border-radius: 20px;
     padding: 0.5rem 2rem;
     cursor: pointer;
-  }
+    border: none;
+    outline: none;
+}
+
+  .submit-button:hover {
+    background-color: #002040;
+}
   
   .background-text {
     position: absolute;
