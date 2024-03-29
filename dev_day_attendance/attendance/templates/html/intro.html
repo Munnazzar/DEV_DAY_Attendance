@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Developer Day Mark Attendance</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'introStyles.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" />
-  </head>
-
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="content">
-        <img src="{% static '/img/DD24_Logo_With_Tagline.png' %}" alt="Developer Day Logo" /> <!-- Corrected path for the image -->
-        <h1>Mark Attendance</h1>
-        <form id="attendanceform" action="#" method="post">
-          {% csrf_token %}
-          <input type="text" id="code" name="code" placeholder="Enter code here" maxlength="9" /><br /><br />
-          <input type="submit" id="submit" value="Submit" />
-        </form>
-        <p style="color: red;">{{msg}}</p>
-      </div>
+        <div class="content">
+            <img src="{% static 'img/DD24_Logo_With_Tagline.png' %}" alt="Developer Day Logo" />
+            <h1>Mark Attendance</h1>
+            <form id="attendanceform" action="{% url 'mark_attendance' %}" method="post">
+                {% csrf_token %}
+                <input type="text" id="code" name="code" placeholder="Enter code here" maxlength="9" /><br /><br />
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <button type="button" id="submitBtn" class="submit-button">Submit</button>
+            </form>
+            <p style="color: red;">{{ msg }}</p>
+        </div>
     </div>
     <div class="background-text">
-      <span>DREAM DEVELOP</span>
-      <span>DELIVER</span>
+        <span>DREAM DEVELOP</span>
+        <span>DELIVER</span>
     </div>
+    <script>
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            document.getElementById("latitude").value = latitude;
+            document.getElementById("longitude").value = longitude;
+            document.getElementById('attendanceform').submit();
+        }
 
-    <!-- <div style="display: flex; flex-direction: column; color: white; background-color: black;z-index: 100;">
-      {% for p in DevDayAttendenceData %}
-        <div>{{ p.team_name }}</div>
-        <div>{{ p.att_code }}</div>
-        
-      {% endfor %}
-    </div> -->
-  </body>
+        function getLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(showPosition, function(error) {
+                    console.error('Error getting geolocation:', error.message);
+                    // If geolocation fails, submit the form without location data
+                    document.getElementById('attendanceform').submit();
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser');
+                // If geolocation is not supported, submit the form without location data
+                document.getElementById('attendanceform').submit();
+            }
+        }
+
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the button from submitting the form immediately
+            getLocation();
+        });
+
+        document.getElementById('code').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default form submission
+                getLocation(); // Manually trigger the form submission
+            }
+        });
+    </script>
+</body>
 </html>
